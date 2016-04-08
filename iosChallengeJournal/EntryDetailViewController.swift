@@ -46,6 +46,16 @@ class EntryDetailViewController: UIViewController {
         self.navigationController?.popViewControllerAnimated(true)
     }
     
+    func updateEntry(entry: Entry) {
+            self.entry = entry
+            self.entryTextField.text = entry.title
+            self.detailEntryTextView.text = entry.body
+            EntryController.saveToPersistentStore()
+   
+
+        
+    }
+    
     
 
     /*

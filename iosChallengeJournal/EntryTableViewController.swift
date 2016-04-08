@@ -85,11 +85,16 @@ class EntryTableViewController: UITableViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "openEntry" {
-            guard let destinationViewController = segue.destinationViewController as? EntryDetailViewController,
-                      cell = sender as? UITableViewCell,
-                      indexPath = tableView.indexPathForCell(cell) else {return}
-            let entry = EntryController.entries[indexPath.row]
-            destinationViewController.entry = entry
+            if let destinationViewController = segue.destinationViewController as? EntryDetailViewController {
+                _ = destinationViewController.view
+                let indexPath = tableView.indexPathForSelectedRow
+                
+                if let selectedRow = indexPath?.row {
+                    let entry = EntryController.entries[selectedRow]
+                    destinationViewController.updateEntry(entry)
+                }
+            }
+
         }
 
     }
